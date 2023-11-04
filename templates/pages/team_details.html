@@ -1,0 +1,44 @@
+{% extends 'base.html' %}{{linebreaks}} 
+{% block content %}
+<section class="mt-5">
+  <div class="container">
+    <div class="row">
+      {% for Table, Dict in team_stats.items %}
+          
+          {% if Table == "PowerRatings" %}
+              Table PowerRatings
+          {% endif %}
+          {% if Table == "KeyOffensiveStatsLS" %}
+              Table KeyOffensiveStatsLS
+          {% endif %}
+          {% if Table == "KeyDefensiveStatsLastS" %}
+              Table KeyDefensiveStatsLastS
+          {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Statistic</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>{{ category }}</td>
+      <td>
+        <ul>
+          {% for stat_name, stat_value in stats.items %}
+          <li>{{ stat_name }}: {{ stat_value }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

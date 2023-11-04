@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% load static %} {% block htmlhead %}
+<link rel="stylesheet" href="" />
+{% endblock htmlhead %}
+
+<!-- ***** Preloader Start ***** -->
+{% block content %} {% comment %}
+<div id="preloader">
+  <div class="jumper">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+{% endcomment %}
+<!-- ***** Preloader End ***** -->
+
+<section class="container mt-5 pt-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <h2>CSV Data Table</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Team</th>
+              <th>2022</th>
+              <th>Last 3</th>
+              <th>Last 1</th>
+              <th>Home</th>
+              <th>Away</th>
+              <th>2021</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for team in teams %}
+            <tr>
+              <td>{{ team.rank }}</td>
+              <td>
+                <a href="{% url 'team-details' team.pk %}">{{ team.team }}</a>
+              </td>
+              <td>{{ team.year_2022 }}</td>
+              <td>{{ team.last_3 }}</td>
+              <td>{{ team.last_1 }}</td>
+              <td>{{ team.home }}</td>
+              <td>{{ team.away }}</td>
+              <td>{{ team.year_2021 }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

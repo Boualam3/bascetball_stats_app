@@ -1,0 +1,62 @@
+{% load static %} {{linebreaks}}
+<html>
+  <head>
+    <meta name="googlebot" content="all" />
+
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'favicon.ico' %}"
+    />
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    {% block htmlhead %} {% endblock htmlhead %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fresca&family=Open+Sans:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title class="text-capitalize">{{title}}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/basketstyling.css' %}" />
+  </head>
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    {% comment %}
+    <div id="preloader">
+      <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    {% endcomment %}
+    <!-- ***** Preloader End ***** -->
+    {% include "parts/navbar.html" %} 
+    {% block content %} {% endblock %}
+    {%include "parts/footer.html"%}
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    {% block htmlscript %} {% endblock htmlscript %}
+  </body>
+</html>
