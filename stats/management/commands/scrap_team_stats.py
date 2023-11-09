@@ -14,11 +14,12 @@ class Command(BaseCommand):
         for idx,data in enumerate(teams_link_details):
             id = data['id']
             link = data['link']
-            data_frame = scrap_details_page(link)
+            dicts_of_data_frame = scrap_details_page(link)
+            # print(dicts_of_data_frame)
             if link and id :
                 print('Here we go ')
 
-                p = create_team_stats_objects(id,data_frame)
-            #    print(p)
-            if idx == 3 :
+                p = create_team_stats_objects(id,dicts_of_data_frame)
+                # print(p)
+            if idx == 1 :
                 break

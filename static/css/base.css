@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+li {
+  list-style: none;
+}
+li,
+a {
+  text-decoration: none;
+}
+
+body {
+  /* font-family: "Source Sans Pro", sans-serif; */
+  font-size: 18px;
+}
+
+header {
+  border-bottom: 1px solid #999;
+  margin-bottom: 2rem;
+}

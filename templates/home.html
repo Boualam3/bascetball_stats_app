@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% load static %} {% block htmlhead %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+
+<style></style>
+{% endblock htmlhead %} {% block content %}
+<section id="hero" class="d-flex align-items-center">
+  <div
+    class="container position-relative"
+    data-aos="fade-up"
+    data-aos-delay="500"
+  >
+    <h1>Basketball Stats</h1>
+    <h2>
+      At our platform, we understand the importance of having access to accurate
+      and up-to-date basketball statistics. Our goal is to provide you with the
+      tools you need to analyze and improve your game.
+    </h2>
+    <a href="{% url 'teams' %}" class="btn-get-started scrollto">Get Started</a>
+  </div>
+</section>
+
+<div id="section-wrapper">
+  <section id="stat" class="py-3">
+    <div class="row">
+      <div class="container">
+        <div class="linear-bg p-2">
+          <div class="box-title-img d-flex align-items-center mb-1">
+            <div class="img-container">
+              <img
+                class="w-100 object-fit"
+                src="https://cdn.pixabay.com/photo/2013/07/13/09/46/basketball-155997_640.png"
+                alt="basket-img"
+              />
+            </div>
+            <h1 class="section-head ml-1">
+              Elevate Your Game with Comprehensive Statistics
+            </h1>
+          </div>
+          <h3 class="mb-1">More Stats than you can shake a wedge at.</h3>
+          <p clas="lead mb-1">
+            In the world of basketball, the power of accurate and up-to-date
+            statistics is undeniable. Our mission is to provide you with the
+            tools to elevate your game, leveraging data-driven insights for
+            improvement.
+          </p>
+        </div>
+        <div class="mx-100">
+          <img
+            class="w-100"
+            src="https://images.unsplash.com/photo-1602357280104-742c517a1d82?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFza2V0YmFsbCUyMGNvdXJ0fGVufDB8fDB8fHww"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rounds" class="section py-5">
+    <div class="row">
+      <div class="container linear-bg p-2 p-lg-4">
+        <h3 class="mb-1">Contact Us</h3>
+        <p class="mb-1">
+          We're here to assist you. If you have any questions, feedback, or need
+          support, don't hesitate to reach out. Our team is always ready to help
+          you make the most of your basketball experience.
+        </p>
+        <a href="#" class="btn btn-secondary">Contact-us</a>
+        <p>
+          Feel free to drop us a line, and we'll get back to you as soon as
+          possible. we look forward to connecting with you!
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

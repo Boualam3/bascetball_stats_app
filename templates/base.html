@@ -1,4 +1,4 @@
-{% load static %} {{linebreaks}}
+{% load static %} {{linebreaks}} {{ '<' }}{{ '!DOCTYPE html>' }}
 <html>
   <head>
     <meta name="googlebot" content="all" />
@@ -15,12 +15,18 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    {% block htmlhead %} {% endblock htmlhead %}
-
+    {% block htmlhead %} {% endblock htmlhead %} {% comment %}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fresca&family=Open+Sans:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    {% endcomment %}
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
 
@@ -49,8 +55,13 @@
     </div>
     {% endcomment %}
     <!-- ***** Preloader End ***** -->
-    {% include "parts/navbar.html" %} 
-    {% block content %} {% endblock %}
+
+    {% include "parts/navbar.html" %}
+
+    <div class="container-fluide content">
+      {% block content %} {% endblock %}
+    </div>
+
     {%include "parts/footer.html"%}
 
     <!-- Bootstrap core JavaScript -->

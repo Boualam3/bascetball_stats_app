@@ -1,44 +1,195 @@
-{% extends 'base.html' %}{{linebreaks}} 
+{% extends "base.html" %} 
+{% load static %} 
+{% block htmlhead %}
+
+<link rel="stylesheet" 
+href="{% static 'css/tables_tab.css' %}" />
+
+{% endblock htmlhead %} 
 {% block content %}
-<section class="mt-5">
-  <div class="container">
-    <div class="row">
-      {% for Table, Dict in team_stats.items %}
-          
-          {% if Table == "PowerRatings" %}
-              Table PowerRatings
-          {% endif %}
-          {% if Table == "KeyOffensiveStatsLS" %}
-              Table KeyOffensiveStatsLS
-          {% endif %}
-          {% if Table == "KeyDefensiveStatsLastS" %}
-              Table KeyDefensiveStatsLastS
-          {% endif %}
-      {% endfor %}
-    </div>
+
+
+<section id="tabs" class="stats-details-tabs  h-100">
+  <div class='_stats_details container my-4 p-1 '>
+    {{ stats_details_formatted_html | safe }}
   </div>
-</section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+              <a
+                class="nav-item nav-link active"
+                id="nav-home-tab"
+                data-toggle="tab"
+                href="#power-ratings"
+                role="tab"
+                aria-controls="nav-home"
+                aria-selected="true"
+                >Power Ratings</a
+              >
+              <a
+                class="nav-item nav-link"
+                id="nav-profile-tab"
+                data-toggle="tab"
+                href="#key-offensive-stats"
+                role="tab"
+                aria-controls="nav-profile"
+                aria-selected="false"
+                >Key Offensive Stats LS</a
+              >
+              <a
+                class="nav-item nav-link"
+                id="nav-contact-tab"
+                data-toggle="tab"
+                href="#key-defensive-stats"
+                role="tab"
+                aria-controls="nav-contact"
+                aria-selected="false"
+                >Key Defensive Stats LS</a
+              >
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="power-ratings"
+              role="tabpanel"
+              aria-labelledby="nav-home-tab"
+            >
+            <div class="table-responsive">
+              <table class="table" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Predictive</th>
+                    <th>Home</th>
+                    <th>Away</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for power_ratings in power_ratings_obj %}
+                  <tr>
+                    <td >{{ power_ratings.predictive_rating }}</td>
+                    <td >{{ power_ratings.home_rating }}</td>
+                    <td >{{ power_ratings.away_rating }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="key-offensive-stats"
+              role="tabpanel"
+              aria-labelledby="nav-profile-tab"
+            >
+            <div class="table-responsive">
+                <table class="table" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th >Points/Game	</th>
+                      <th >Avg Score Margin	</th>
+                      <th >Assists/Game	</th>
+                      <th >Total Rebounds/Gm	</th>
+                      <th >Effective FG %	</th>
+                      <th >Off Rebound %</th>	
+                      <th > FTA/FGA	</th>
+                      <th >Turnover</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for key_offensive_stats in key_offensive_stats_obj %}
+                    <tr>
+                      <td >{{ key_offensive_stats.points_per_game }}</td>
 
-{% endblock %}
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Statistic</th>
-    </tr>
-  </thead>
-  <tbody>
-    
-    <tr>
-      <td>{{ category }}</td>
-      <td>
-        <ul>
-          {% for stat_name, stat_value in stats.items %}
-          <li>{{ stat_name }}: {{ stat_value }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-
-  </tbody>
-</table>
+                    
+                      <td >{{ key_offensive_stats.average_score_margin }}</td>
+                      <td >{{ key_offensive_stats.assists_per_game }}</td>
+                      <td >{{ key_offensive_stats.total_rebounds_per_game }}</td>
+                      <td >{{ key_offensive_stats.effective_fg_percentage }}</td>
+                      <td >{{ key_offensive_stats.offensive_rebound_percentage }}</td>
+                      <td >{{ key_offensive_stats.free_throw_attempt_to_field_goal_attempt_ratio }}</td>
+                      <td >{{ key_offensive_stats.turnover_percentage }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="key-defensive-stats"
+              role="tabpanel"
+              aria-labelledby="nav-contact-tab"
+            >
+            <div class="table-responsive">
+              <table class="table" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Opp Points/Game	</th>
+                    <th>Opp Effective FG %</th>	
+                    <th>Off Rebounds/Gm</th>
+                    <th>Def Rebounds/Gm	</th>
+                    <th>Blocks/Game	</th>
+                    <th>Steals/Game</th>
+                    <th>Personal Fouls/Gm	</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for key_defensive_stats in key_defensive_stats_obj %}
+                  <tr>
+                    <td >{{ key_defensive_stats.opponent_points_per_game }}</td>
+                    <td >{{ key_defensive_stats.opponent_effective_fg_percentage }}</td>
+                    <td >{{ key_defensive_stats.offensive_rebounds_per_game }}</td>
+                    <td >{{ key_defensive_stats.defensive_rebounds_per_game }}</td>
+                    <td >{{ key_defensive_stats.blocks_per_game }}</td>
+                    <td >{{ key_defensive_stats.steals_per_game }}</td>
+                    <td >{{ key_defensive_stats.personal_fouls_per_game }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+        
+        </div>
+        {#===============================================================#}
+        <div class="col-lg-12  mt-3">
+          <div class="p-2 border mb-2">
+            <h2>Result and Schedule</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped border">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Opponent</th>
+                  <th scope="col">Result</th>
+                  <th scope="col">Location </th>
+                  <th scope="col">W/L </th>
+                  <th scope="col">Conference</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for result_and_schedule_stats in result_and_schedule_stats_obj %}
+                <tr>
+                  <th scope="row">{{ result_and_schedule_stats.date | date:"m/d"  }}</th>
+                  <td>{{ result_and_schedule_stats.opponent }}</td>
+                  <td>{{ result_and_schedule_stats.result }}</td>
+                  <td>{{ result_and_schedule_stats.location }}</td>
+                  <td>{{ result_and_schedule_stats.win_loss }}</td>
+                  <td>{{ result_and_schedule_stats.conference }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {#===============================================================#}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}

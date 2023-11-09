@@ -1,8 +1,9 @@
 import os,sys,sqlite3
 from django.utils.text import slugify
 import pandas as pd
+
 from django.conf import settings
-from .models import Team, TeamStats
+from .models import Team, TeamStats,PowerRatings,KeyOffensiveStatsLS,KeyDefensiveStatsLS,ResultAndScheduleStats
 
 connection = sqlite3.connect(os.path.join(settings.BASE_DIR,'db.sqlite3'))
 
@@ -37,45 +38,94 @@ def create_teams_objects(data_frame=[]):
           team_list.append(team_obj)
      Team.objects.bulk_create(team_list)
 
-
-
-def create_team_stats_objects(team_id,data_frame):
-     if data_frame is None:
+def create_team_stats_objects(team_id,stats_dicts_df):
+     if stats_dicts_df is None:
           return
-     # data_frame.to_sql('teamstats',connection, if_exists="replace", index=False)
-     # connection.commit()
-     # connection.close()
-
 
      column_mapping = {
-          'predictive': 'predictive_rating',
-          'home': 'home_rating',
-          'away': 'away_rating',
-          'pointsgame': 'points_per_game',
-          'avg-score-margin': 'average_score_margin',
-          'assistsgame': 'assists_per_game',
-          'total-reboundsgm': 'total_rebounds_per_game',
-          'effective-fg': 'effective_fg_percentage',
-          'off-rebound': 'offensive_rebound_percentage',
-          'ftafga': 'free_throw_attempt_to_field_goal_attempt_ratio',
-          'turnover': 'turnover_percentage',
-          'opp-pointsgame': 'opponent_points_per_game',
-          'opp-effective-fg': 'opponent_effective_fg_percentage',
-          'off-reboundsgm': 'offensive_rebounds_per_game',
-          'def-reboundsgm': 'defensive_rebounds_per_game',
-          'blocksgame': 'blocks_per_game',
-          'stealsgame': 'steals_per_game',
-          'personal-foulsgm': 'personal_fouls_per_game',
+          'PowerRatings':{
+               'predictive': 'predictive_rating',
+               'home': 'home_rating',
+               'away': 'away_rating'
+          },
+          'KeyOffensiveStatsLS':{
+               'pointsgame': 'points_per_game',
+               'avg-score-margin': 'average_score_margin',
+               'assistsgame': 'assists_per_game',
+               'total-reboundsgm': 'total_rebounds_per_game',
+               'effective-fg': 'effective_fg_percentage',
+               'off-rebound': 'offensive_rebound_percentage',
+               'ftafga': 'free_throw_attempt_to_field_goal_attempt_ratio',
+               'turnover': 'turnover_percentage'
+          },
+          'KeyDefensiveStatsLS':{
+               'opp-pointsgame': 'opponent_points_per_game',
+               'opp-effective-fg': 'opponent_effective_fg_percentage',
+               'off-reboundsgm': 'offensive_rebounds_per_game',
+               'def-reboundsgm': 'defensive_rebounds_per_game',
+               'blocksgame': 'blocks_per_game',
+               'stealsgame': 'steals_per_game',
+               'personal-foulsgm': 'personal_fouls_per_game'
+          },
      }
+     
      team_stats = TeamStats(team_id=team_id)
+     power_ratings_obj=PowerRatings(team_id=team_id)
+     key_offensive_stats_ls_obj=KeyOffensiveStatsLS(team_id=team_id)
+     key_defensive_stats_ls_obj=KeyDefensiveStatsLS(team_id=team_id)
+     
+     for key,value in stats_dicts_df.items():
+
+          if key == 'PowerRatings' :
+               # print(key,'\n',value)
+               create_team_stats_from_dataframe(power_ratings_obj,value,column_mapping[key])
+               # power_ratings_obj.save()
+          if key == 'KeyOffensiveStatsLS' :
+               # print(key,'\n',value)
+               
+               create_team_stats_from_dataframe(key_offensive_stats_ls_obj,value,column_mapping[key])
+               # key_offensive_stats_ls_obj.save()
+          if key == 'KeyDefensiveStatsLS' :
+               # print(key,'\n',value)
+               
+               create_team_stats_from_dataframe(key_defensive_stats_ls_obj,value,column_mapping[key])
+               # key_defensive_stats_ls_obj.save()
+          if key == 'StatsDetailsFormattedHtml':
+               setattr(team_stats,'stats_details_formatted_html' , str(value))
+               team_stats.save()
+          
+          if key == 'ResultAndScheduleStats' :
+               create_bulk_objs_results_and_schedule_from_df(team_id,value)
+
+def create_team_stats_from_dataframe(Object,data_frame,column_mapping):
      for _,row in data_frame.iterrows():
           slug = slugify(row[0])
           field_name = column_mapping[slug]
           print(f'{field_name} : {row[1]}')
-          setattr(team_stats,field_name , str(row[1]))
-     team_stats.save()
+          setattr(Object,field_name , str(row[1]))
+     Object.save()
 
+def create_bulk_objs_results_and_schedule_from_df(team_id,data_frame):
+     # if not team_id or not data_frame :
+     #      return
+     result_and_schedule_objs_list = []
+     
+     for index, row in data_frame.iterrows():
+               obj = ResultAndScheduleStats(
+                    team_id=team_id,
+                    date=row['Date'],
+                    opponent=row['Opponent'],
+                    result=row['Result'],
+                    location=row['Location'],
+                    win_loss=row['W/L'],
+                    conference=row['Conf'],
+                    spread=row['Spread'],
+                    total=row['Total'],
+                    money=row['Money'],
+               )
+               result_and_schedule_objs_list.append(obj)
 
+     ResultAndScheduleStats.objects.bulk_create(result_and_schedule_objs_list)
 
 
 

@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party libraries
+    # 'django_tables2',
     # local apps
     'stats.apps.StatsConfig',
-    # third party libraries
-    'django_tables2'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +130,17 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+USE_L10N = True
+
+
+DATE_INPUT_FORMATS = (
+    '%d.%m.%Y', '%d.%m.%Y', '%d.%m.%y',  # '25.10.2006', '25.10.2006', '25.10.06'
+    '%d-%m-%Y', '%d/%m/%Y', '%d/%m/%y',  # '25-10-2006', '25/10/2006', '25/10/06'
+    '%d %b %Y',  # '25 Oct 2006', 
+    '%d %B %Y',  # '25 October 2006',
+    '%Y/%m',     # '2023/11' (year/month)
+    '%m/%d',     # '11/06' (month/day)
+    '%m/%d'
+)

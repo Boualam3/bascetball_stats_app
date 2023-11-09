@@ -12,8 +12,7 @@
 
 <nav class="col-lg-6 offset-lg-3 mt-4 d-flex justify-content-center ">
      {% if query_search %}
-     <ul class="pagination ">
- 
+     <ul class="pagination pagination-sm flex-wrap flex-lg-nowrap">
        {% if page_obj.has_previous %}
        <li class="page-item">
          <a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ query_search }}">Previous</a>
@@ -24,11 +23,16 @@
        </li>
        {% endif %}
  
-       {% for i in page_obj.paginator.page_range %}
-       <li class="page-item {% if page_obj.number == i %}active{% endif %}">
-           <a class="page-link" href="?page={{ i }}&q={{ query_search }}">{{ i }}</a>
-       </li>
-       {% endfor %}
+       {% for i in page_range %}
+          <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+              <a class="page-link" href="?page={{ i }}&q={{ query_search }}">{{ i }}</a>
+          </li>
+        {% endfor %}
+        {% if page_obj.paginator.num_pages > 10 %}
+            <li class="page-item">
+              <a class="page-link">...</a>
+            </li>
+        {% endif %}
  
        {% if page_obj.has_next %}
        <li class="page-item">
@@ -42,8 +46,7 @@
  
      </ul>
      {% else %}
-     <ul class="pagination">
- 
+     <ul class="pagination pagination-sm flex-wrap flex-lg-nowrap">
        {% if page_obj.has_previous %}
        <li class="page-item">
          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
@@ -54,11 +57,14 @@
        </li>
        {% endif %}
  
-       {% for i in page_obj.paginator.page_range %}
-       <li class=" page-item {% if page_obj.number == i %}active{% endif %}">
-           <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-       </li>
-       {% endfor %}
+       {% for i in page_range %}
+          <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+              <a class="page-link" href="?page={{ i }}&q={{ query_search }}">{{ i }}</a>
+          </li>
+        {% endfor %}
+        {% if page_obj.paginator.num_pages > 10 %}
+            <li class="page-item"><a class="page-link">...</a></li>
+        {% endif %}
  
        {% if page_obj.has_next %}
        <li class="page-item">
