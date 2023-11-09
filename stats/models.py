@@ -12,12 +12,12 @@ class Team(models.Model):
     rank = models.IntegerField(blank=True, null=True)
     team = models.CharField(max_length=100,blank=True, null=True)
 
-    year_2022 = models.CharField(max_length=10,blank=True, null=True)
+    year_2023 = models.CharField(max_length=10,blank=True, null=True)
     last_3 = models.CharField(max_length=10,blank=True, null=True)
     last_1 = models.CharField(max_length=10,blank=True, null=True)
     home = models.CharField(max_length=10,blank=True, null=True)
     away = models.CharField(max_length=10,blank=True, null=True)
-    year_2021 = models.CharField(max_length=10,blank=True, null=True)
+    year_2022 = models.CharField(max_length=10,blank=True, null=True)
     original_link = models.CharField(max_length=255,blank=True, null=True)
     
 

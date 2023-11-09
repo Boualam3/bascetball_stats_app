@@ -9,30 +9,31 @@ connection = sqlite3.connect(os.path.join(settings.BASE_DIR,'db.sqlite3'))
 
 def create_teams_objects(data_frame=[]):
      if not len(data_frame) : 
+          return
           csv_file_path = os.path.join(settings.BASE_DIR,'data_stats/table_data.csv')  
           data = pd.read_csv(csv_file_path)
-
           data_frame = data.where(pd.notnull(data), None)
+     
      team_list = []
      for _, row in data_frame.iterrows():
           rank  = str(row['Rank'])
           team  = str(row['Team'])
-          year_2022  = str(row['2022'])
+          year_2023  = str(row['2023'])
           last_3  = str(row['Last 3'])
           last_1  = str(row['Last 1'])
           home  = str(row['Home'])
           away = str(row['Away'])
-          year_2021  = str(row['2021'])
+          year_2022  = str(row['2022'])
           original_link = str(row['More'])
           team_obj = Team(
                rank=rank,
                team=team,
-               year_2022=year_2022,
+               year_2023=year_2023,
                last_3=last_3,
                last_1=last_1,
                home=home,
                away=away,
-               year_2021=year_2021,
+               year_2022=year_2022,
                original_link=original_link
           )
           team_list.append(team_obj)

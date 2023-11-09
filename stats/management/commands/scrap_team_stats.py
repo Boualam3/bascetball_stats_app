@@ -21,5 +21,5 @@ class Command(BaseCommand):
 
                 p = create_team_stats_objects(id,dicts_of_data_frame)
                 # print(p)
-            if idx == 1 :
+            if idx == 4 :
                 break

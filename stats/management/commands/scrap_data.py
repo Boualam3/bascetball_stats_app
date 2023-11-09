@@ -13,6 +13,7 @@ class Command(BaseCommand):
         print('Populating the database...')
         
         data_frame = scrap_main_table()
+        print(data_frame)
         create_teams_objects(data_frame)
         
         
