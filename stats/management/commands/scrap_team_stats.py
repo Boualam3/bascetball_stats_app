@@ -21,5 +21,6 @@ class Command(BaseCommand):
 
                 p = create_team_stats_objects(id,dicts_of_data_frame)
                 # print(p)
+            # we don't need to loop throught all the data , (long process) since we are testing 
             if idx == 4 :
                 break
