@@ -96,6 +96,7 @@ def about_page(request):
 
 
 def contact_page(request):
+    # using recaptcha  with ContactForm better then this hard code 
     if request.method == 'POST':
         contact = Contact()
         name = request.POST.get('name')
