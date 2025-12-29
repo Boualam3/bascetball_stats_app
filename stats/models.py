@@ -111,10 +111,10 @@ class KeyDefensiveStatsLS(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=158)
-    subject = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField()
     message = models.TextField()
-    date_time = models.DateField()
+    date_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'from {self.name}'

@@ -8,6 +8,7 @@ from django.core.paginator import PageNotAnInteger
 from django.shortcuts import render,redirect
 from django.views.generic import ListView, DetailView
 from .models import Team,TeamStats,Contact 
+from django.contrib import messages
 # from .tables import TeamTable
 # Create your views here.
 
@@ -94,22 +95,37 @@ def about_page(request):
      return render(request, template_name='pages/about.html')
 
 
-
 def contact_page(request):
-    # using recaptcha  with ContactForm better then this hard code 
     if request.method == 'POST':
-        contact = Contact()
+        # 1. Bot Prevention: Check Honeypot
+        if request.POST.get('b_username'):
+            # It's a bot. Divert them silently.
+            return redirect('contact')
+
+        # 2. Get Data
         name = request.POST.get('name')
         subject = request.POST.get('subject')
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-        contact.name = name
-        contact.subject = subject
-        contact.email = email
-        contact.message = message
-        contact.save()
-        return redirect('contact')
-    
-    if request.method == 'GET':
-        return render(request, template_name='pages/contact.html', context={'title': 'Contact us', "header_title": "contact us", "header_desc": "let’s stay in touch!", })
+        # 3. Simple Validation & Save
+        if name and email and message:
+            Contact.objects.create(
+                name=name,
+                subject=subject,
+                email=email,
+                message=message
+            )
+            messages.success(
+                request, "Your message has been sent successfully!")
+            return redirect('contact')
+        else:
+            messages.error(request, "Please fill in all required fields.")
+
+    # GET Request logic
+    context = {
+        'title': 'Contact Us',
+        'header_title': 'Contact Us',
+        'header_desc': 'Let’s stay in touch!',
+    }
+    return render(request, 'pages/contact.html', context)

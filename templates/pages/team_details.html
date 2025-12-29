@@ -1,195 +1,505 @@
 {% extends "base.html" %} 
 {% load static %} 
+
 {% block htmlhead %}
+<style>
+/* Modern Team Details Page Styles */
 
-<link rel="stylesheet" 
-href="{% static 'css/tables_tab.css' %}" />
+/* Page Header */
+.team-header {
+  background: linear-gradient(135deg, #1a1d29 0%, #2d4263 100%);
+  color: white;
+  padding: 3rem 0;
+  margin-top: 70px;
+  margin-bottom: 2rem;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
 
+.team-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Stats Details Card */
+.stats-details-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.stats-details-card table {
+  margin: 0;
+}
+
+/* Modern Tabs */
+.nav-tabs-modern {
+  border: none;
+  background: white;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 0;
+}
+
+.nav-tabs-modern .nav-item {
+  margin: 0 0.25rem;
+}
+
+.nav-tabs-modern .nav-link {
+  border: none;
+  border-radius: 8px;
+  color: #6c757d;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.nav-tabs-modern .nav-link:hover {
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.08);
+}
+
+.nav-tabs-modern .nav-link.active {
+  color: white;
+  background: linear-gradient(135deg, #ff6b35, #ffd23f);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+/* Tab Content */
+.tab-content-modern {
+  background: white;
+  border-radius: 0 0 16px 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Modern Table Styles */
+.modern-table {
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.modern-table thead th {
+  background: #f8f9fa;
+  color: #1a1d29;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+  border-bottom: 2px solid #e9ecef;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.modern-table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modern-table tbody tr:hover {
+  background-color: rgba(255, 107, 53, 0.05);
+  transform: scale(1.01);
+}
+
+.modern-table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  color: #495057;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modern-table tbody th {
+  font-weight: 700;
+  color: #1a1d29;
+  padding: 1rem;
+}
+
+/* Section Headers */
+.section-header {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 210, 63, 0.1));
+  padding: 1.5rem;
+  border-left: 4px solid #ff6b35;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1d29;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-header i {
+  color: #ff6b35;
+}
+
+/* Stat Badges */
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #ff6b35, #ffd23f);
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+/* Result Badge */
+.result-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.result-badge.win {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.result-badge.loss {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Location Badge */
+.location-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #e9ecef;
+  color: #495057;
+}
+
+.location-badge.home {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.location-badge.away {
+  background: #f8d7da;
+  color: #842029;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .team-header {
+    padding: 2rem 0;
+  }
+  
+  .team-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .nav-tabs-modern {
+    flex-direction: column;
+  }
+  
+  .nav-tabs-modern .nav-item {
+    margin: 0.25rem 0;
+  }
+  
+  .nav-tabs-modern .nav-link {
+    text-align: center;
+    padding: 0.875rem;
+    font-size: 0.9rem;
+  }
+  
+  .tab-content-modern {
+    padding: 1rem;
+  }
+  
+  .modern-table thead th,
+  .modern-table tbody td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .section-header {
+    padding: 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Empty state for tables */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #6c757d;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #dee2e6;
+  margin-bottom: 1rem;
+}
+</style>
 {% endblock htmlhead %} 
+
 {% block content %}
 
+<!-- Team Header -->
+<div class="team-header">
+  <div class="container">
+    <h1>
+      <i class="fas fa-basketball-ball mr-2"></i>
+      Team Statistics & Performance
+    </h1>
+  </div>
+</div>
 
-<section id="tabs" class="stats-details-tabs  h-100">
-  <div class='_stats_details container my-4 p-1 '>
+<section class="container mb-5">
+  
+  <!-- Stats Details from Backend -->
+  {% if stats_details_formatted_html %}
+  <div class="stats-details-card">
     {{ stats_details_formatted_html | safe }}
   </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <nav>
-            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-              <a
-                class="nav-item nav-link active"
-                id="nav-home-tab"
-                data-toggle="tab"
-                href="#power-ratings"
-                role="tab"
-                aria-controls="nav-home"
-                aria-selected="true"
-                >Power Ratings</a
-              >
-              <a
-                class="nav-item nav-link"
-                id="nav-profile-tab"
-                data-toggle="tab"
-                href="#key-offensive-stats"
-                role="tab"
-                aria-controls="nav-profile"
-                aria-selected="false"
-                >Key Offensive Stats LS</a
-              >
-              <a
-                class="nav-item nav-link"
-                id="nav-contact-tab"
-                data-toggle="tab"
-                href="#key-defensive-stats"
-                role="tab"
-                aria-controls="nav-contact"
-                aria-selected="false"
-                >Key Defensive Stats LS</a
-              >
-            </div>
-          </nav>
-          <div class="tab-content" id="nav-tabContent">
-            <div
-              class="tab-pane fade show active"
-              id="power-ratings"
-              role="tabpanel"
-              aria-labelledby="nav-home-tab"
-            >
-            <div class="table-responsive">
-              <table class="table" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Predictive</th>
-                    <th>Home</th>
-                    <th>Away</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for power_ratings in power_ratings_obj %}
-                  <tr>
-                    <td >{{ power_ratings.predictive_rating }}</td>
-                    <td >{{ power_ratings.home_rating }}</td>
-                    <td >{{ power_ratings.away_rating }}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-              </div>
-            </div>
-            <div
-              class="tab-pane fade"
-              id="key-offensive-stats"
-              role="tabpanel"
-              aria-labelledby="nav-profile-tab"
-            >
-            <div class="table-responsive">
-                <table class="table" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th >Points/Game	</th>
-                      <th >Avg Score Margin	</th>
-                      <th >Assists/Game	</th>
-                      <th >Total Rebounds/Gm	</th>
-                      <th >Effective FG %	</th>
-                      <th >Off Rebound %</th>	
-                      <th > FTA/FGA	</th>
-                      <th >Turnover</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for key_offensive_stats in key_offensive_stats_obj %}
-                    <tr>
-                      <td >{{ key_offensive_stats.points_per_game }}</td>
-
-                    
-                      <td >{{ key_offensive_stats.average_score_margin }}</td>
-                      <td >{{ key_offensive_stats.assists_per_game }}</td>
-                      <td >{{ key_offensive_stats.total_rebounds_per_game }}</td>
-                      <td >{{ key_offensive_stats.effective_fg_percentage }}</td>
-                      <td >{{ key_offensive_stats.offensive_rebound_percentage }}</td>
-                      <td >{{ key_offensive_stats.free_throw_attempt_to_field_goal_attempt_ratio }}</td>
-                      <td >{{ key_offensive_stats.turnover_percentage }}</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div
-              class="tab-pane fade"
-              id="key-defensive-stats"
-              role="tabpanel"
-              aria-labelledby="nav-contact-tab"
-            >
-            <div class="table-responsive">
-              <table class="table" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Opp Points/Game	</th>
-                    <th>Opp Effective FG %</th>	
-                    <th>Off Rebounds/Gm</th>
-                    <th>Def Rebounds/Gm	</th>
-                    <th>Blocks/Game	</th>
-                    <th>Steals/Game</th>
-                    <th>Personal Fouls/Gm	</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for key_defensive_stats in key_defensive_stats_obj %}
-                  <tr>
-                    <td >{{ key_defensive_stats.opponent_points_per_game }}</td>
-                    <td >{{ key_defensive_stats.opponent_effective_fg_percentage }}</td>
-                    <td >{{ key_defensive_stats.offensive_rebounds_per_game }}</td>
-                    <td >{{ key_defensive_stats.defensive_rebounds_per_game }}</td>
-                    <td >{{ key_defensive_stats.blocks_per_game }}</td>
-                    <td >{{ key_defensive_stats.steals_per_game }}</td>
-                    <td >{{ key_defensive_stats.personal_fouls_per_game }}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            </div>
-          </div>
-        
-        </div>
-        {#===============================================================#}
-        <div class="col-lg-12  mt-3">
-          <div class="p-2 border mb-2">
-            <h2>Result and Schedule</h2>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-striped border">
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Opponent</th>
-                  <th scope="col">Result</th>
-                  <th scope="col">Location </th>
-                  <th scope="col">W/L </th>
-                  <th scope="col">Conference</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for result_and_schedule_stats in result_and_schedule_stats_obj %}
-                <tr>
-                  <th scope="row">{{ result_and_schedule_stats.date | date:"m/d"  }}</th>
-                  <td>{{ result_and_schedule_stats.opponent }}</td>
-                  <td>{{ result_and_schedule_stats.result }}</td>
-                  <td>{{ result_and_schedule_stats.location }}</td>
-                  <td>{{ result_and_schedule_stats.win_loss }}</td>
-                  <td>{{ result_and_schedule_stats.conference }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {#===============================================================#}
+  {% endif %}
+  
+  <!-- Tabs Section -->
+  <div class="mb-4">
+    
+    <!-- Tab Navigation -->
+    <nav>
+      <div class="nav nav-tabs nav-tabs-modern" id="nav-tab" role="tablist">
+        <a
+          class="nav-item nav-link active"
+          id="nav-power-tab"
+          data-toggle="tab"
+          href="#power-ratings"
+          role="tab"
+          aria-selected="true"
+        >
+          <i class="fas fa-star mr-2"></i>
+          Power Ratings
+        </a>
+        <a
+          class="nav-item nav-link"
+          id="nav-offensive-tab"
+          data-toggle="tab"
+          href="#key-offensive-stats"
+          role="tab"
+          aria-selected="false"
+        >
+          <i class="fas fa-crosshairs mr-2"></i>
+          Offensive Stats
+        </a>
+        <a
+          class="nav-item nav-link"
+          id="nav-defensive-tab"
+          data-toggle="tab"
+          href="#key-defensive-stats"
+          role="tab"
+          aria-selected="false"
+        >
+          <i class="fas fa-shield-alt mr-2"></i>
+          Defensive Stats
+        </a>
       </div>
+    </nav>
+    
+    <!-- Tab Content -->
+    <div class="tab-content tab-content-modern" id="nav-tabContent">
+      
+      <!-- Power Ratings Tab -->
+      <div
+        class="tab-pane fade show active"
+        id="power-ratings"
+        role="tabpanel"
+      >
+        <div class="table-responsive">
+          <table class="table modern-table">
+            <thead>
+              <tr>
+                <th>Predictive</th>
+                <th>Home</th>
+                <th>Away</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for power_ratings in power_ratings_obj %}
+              <tr>
+                <td>{{ power_ratings.predictive_rating }}</td>
+                <td>{{ power_ratings.home_rating }}</td>
+                <td>{{ power_ratings.away_rating }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="3" class="empty-state">
+                  <i class="fas fa-chart-line"></i>
+                  <p>No power ratings data available</p>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Offensive Stats Tab -->
+      <div
+        class="tab-pane fade"
+        id="key-offensive-stats"
+        role="tabpanel"
+      >
+        <div class="table-responsive">
+          <table class="table modern-table">
+            <thead>
+              <tr>
+                <th>Points/Game</th>
+                <th>Avg Score Margin</th>
+                <th>Assists/Game</th>
+                <th>Total Rebounds/Gm</th>
+                <th>Effective FG %</th>
+                <th>Off Rebound %</th>
+                <th>FTA/FGA</th>
+                <th>Turnover</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key_offensive_stats in key_offensive_stats_obj %}
+              <tr>
+                <td>{{ key_offensive_stats.points_per_game }}</td>
+                <td>{{ key_offensive_stats.average_score_margin }}</td>
+                <td>{{ key_offensive_stats.assists_per_game }}</td>
+                <td>{{ key_offensive_stats.total_rebounds_per_game }}</td>
+                <td>{{ key_offensive_stats.effective_fg_percentage }}</td>
+                <td>{{ key_offensive_stats.offensive_rebound_percentage }}</td>
+                <td>{{ key_offensive_stats.free_throw_attempt_to_field_goal_attempt_ratio }}</td>
+                <td>{{ key_offensive_stats.turnover_percentage }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="8" class="empty-state">
+                  <i class="fas fa-crosshairs"></i>
+                  <p>No offensive statistics available</p>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Defensive Stats Tab -->
+      <div
+        class="tab-pane fade"
+        id="key-defensive-stats"
+        role="tabpanel"
+      >
+        <div class="table-responsive">
+          <table class="table modern-table">
+            <thead>
+              <tr>
+                <th>Opp Points/Game</th>
+                <th>Opp Effective FG %</th>
+                <th>Off Rebounds/Gm</th>
+                <th>Def Rebounds/Gm</th>
+                <th>Blocks/Game</th>
+                <th>Steals/Game</th>
+                <th>Personal Fouls/Gm</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key_defensive_stats in key_defensive_stats_obj %}
+              <tr>
+                <td>{{ key_defensive_stats.opponent_points_per_game }}</td>
+                <td>{{ key_defensive_stats.opponent_effective_fg_percentage }}</td>
+                <td>{{ key_defensive_stats.offensive_rebounds_per_game }}</td>
+                <td>{{ key_defensive_stats.defensive_rebounds_per_game }}</td>
+                <td>{{ key_defensive_stats.blocks_per_game }}</td>
+                <td>{{ key_defensive_stats.steals_per_game }}</td>
+                <td>{{ key_defensive_stats.personal_fouls_per_game }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="7" class="empty-state">
+                  <i class="fas fa-shield-alt"></i>
+                  <p>No defensive statistics available</p>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
     </div>
-  </section>
-</div>
+  </div>
+  
+  <!-- Results and Schedule Section -->
+  <div class="section-header">
+    <h2>
+      <i class="fas fa-calendar-alt"></i>
+      Results & Schedule
+    </h2>
+  </div>
+  
+  <div class="tab-content-modern">
+    <div class="table-responsive">
+      <table class="table modern-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Opponent</th>
+            <th>Result</th>
+            <th>Location</th>
+            <th>W/L</th>
+            <th>Conference</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for result_and_schedule_stats in result_and_schedule_stats_obj %}
+          <tr>
+            <th scope="row">{{ result_and_schedule_stats.date | date:"m/d" }}</th>
+            <td>{{ result_and_schedule_stats.opponent }}</td>
+            <td>{{ result_and_schedule_stats.result }}</td>
+            <td>
+              <span class="location-badge {% if result_and_schedule_stats.location == 'Home' %}home{% else %}away{% endif %}">
+                {{ result_and_schedule_stats.location }}
+              </span>
+            </td>
+            <td>
+              <span class="result-badge {% if result_and_schedule_stats.win_loss == 'W' %}win{% else %}loss{% endif %}">
+                {{ result_and_schedule_stats.win_loss }}
+              </span>
+            </td>
+            <td>{{ result_and_schedule_stats.conference }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="empty-state">
+              <i class="fas fa-calendar-times"></i>
+              <p>No schedule data available</p>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</section>
+
 {% endblock content %}

@@ -1,73 +1,126 @@
-{% load static %} {{linebreaks}} {{ '<' }}{{ '!DOCTYPE html>' }}
-<html>
-  <head>
-    <meta name="googlebot" content="all" />
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="googlebot" content="all" />
+  <meta name="description" content="Comprehensive basketball statistics platform with real-time data, team analytics, and player performance tracking." />
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+  
+  <!-- Google Fonts - Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <title>{{ title|default:"Basketball Stats Platform" }}</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/basketstyling.css' %}" />
+  
+  {% block htmlhead %}{% endblock htmlhead %}
+</head>
 
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="{% static 'favicon.ico' %}"
-    />
+<body>
+  <!-- Preloader -->
+  <div id="preloader" style="display: none;">
+    <div class="jumper">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+  <!-- Navigation -->
+  {% include "parts/navbar.html" %}
 
-    {% block htmlhead %} {% endblock htmlhead %} {% comment %}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fresca&family=Open+Sans:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    {% endcomment %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-dismissible fade show shadow-md d-flex align-items-center mb-3" 
+           role="alert" 
+           style="background: white; border-left: 5px solid {% if message.tags == 'success' %}var(--primary-orange){% else %}var(--primary-blue){% endif %}; border-radius: var(--radius-md); padding: var(--spacing-sm) var(--spacing-md);">
+        
+        <div class="me-3 fs-4" style="color: {% if message.tags == 'success' %}var(--primary-orange){% else %}var(--primary-blue){% endif %};">
+          {% if message.tags == 'success' %}
+            <i class="fas fa-check-circle"></i>
+          {% else %}
+            <i class="fas fa-info-circle"></i>
+          {% endif %}
+        </div>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
+        <div class="flex-grow-1">
+          <strong class="text-dark d-block">{% if message.tags == 'success' %}Success!{% else %}Notification{% endif %}</strong>
+          <span class="text-secondary small">{{ message }}</span>
+        </div>
 
-    <title class="text-capitalize">{{title}}</title>
-
-    <!-- Bootstrap core CSS -->
-    <link
-      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
-      rel="stylesheet"
-    />
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
-
-    <link rel="stylesheet" href="{% static 'css/basketstyling.css' %}" />
-  </head>
-  <body>
-    <!-- ***** Preloader Start ***** -->
-    {% comment %}
-    <div id="preloader">
-      <div class="jumper">
-        <div></div>
-        <div></div>
-        <div></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="font-size: 0.8rem;"></button>
       </div>
-    </div>
-    {% endcomment %}
-    <!-- ***** Preloader End ***** -->
+    {% endfor %}
+  {% endif %}
+  <!-- Main Content -->
+  <main class="content">
 
-    {% include "parts/navbar.html" %}
+    {% block content %}{% endblock %}
+  </main>
 
-    <div class="container-fluide content">
-      {% block content %} {% endblock %}
-    </div>
+  <!-- Footer -->
+  {% include "parts/footer.html" %}
 
-    {%include "parts/footer.html"%}
+  <!-- Bootstrap & jQuery -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  
+  <!-- Custom Scripts -->
+  <script>
+    setTimeout(function() {
+    let alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+      let bsAlert = new bootstrap.Alert(alert);
+      bsAlert.close();
+    });
+  }, 5000);
+  
+    // Preloader
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.style.display = 'none';
+      }
+    });
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (header) {
+        if (window.scrollY > 50) {
+          header.classList.add('background-header');
+        } else {
+          header.classList.remove('background-header');
+        }
+      }
+    });
 
-    {% block htmlscript %} {% endblock htmlscript %}
-  </body>
+    // Mobile menu close on link click
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        const navbarCollapse = document.getElementById('navbarResponsive');
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+          const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+          bsCollapse.hide();
+        }
+      });
+    });
+  </script>
+  
+  {% block htmlscript %}{% endblock htmlscript %}
+</body>
 </html>

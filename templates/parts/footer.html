@@ -1,29 +1,126 @@
-<footer class='container-fluide mt-0'>
-       <div class="row">
-         <div class="col-lg-12 mb-1">
-           <ul class="social-icons mb-0 pb-2">
-             <li><a href="{% url "home" %}">Home</a></li>
-             {% comment %} <li><a href="{% url "about" %}">About us</a></li>
-             <li><a href="{% url "terms" %}">Terms </a></li>
-             <li><a href="{% url "privacy" %}">Privacy</a></li> {% endcomment %}
-           </ul>
-         </div>
-         <div class="col-lg-12 mt-5">
-           <ul class="social-icons p-1">
-             <li><a href="{% url "home" %}">Facebook</a></li>
-             <li><a href="{% url "home" %}">Twitter</a></li>
-             <li><a href="{% url "home" %}">Linkdin </a></li>
+{% load static %}
 
-           </ul>
-         </div>
-         <div class="col-lg-12">
-           <div class="copyright-text">
-             <p>
-               Copyright 2023   <a href="">BasketStats</a>
-             </p>
+<footer>
+  <div class="container">
+    <!-- Social Links -->
+    <ul class="social-icons">
+      <li>
+        <a href="#" aria-label="Facebook" title="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" aria-label="Twitter" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" aria-label="LinkedIn" title="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" aria-label="YouTube" title="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </li>
+    </ul>
 
-           </div>
-         </div>
-       </div>
+    <!-- Footer Links -->
+    <div class="row mb-4">
+      <div class="col-md-3 col-6 mb-3">
+        <h5 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Quick Links</h5>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.5rem;">
+            <a href="{% url 'home' %}" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Home</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="{% url 'teams' %}" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Teams</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Players</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Statistics</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 col-6 mb-3">
+        <h5 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Resources</h5>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">API Documentation</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Data Sources</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Help Center</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">FAQ</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 col-6 mb-3">
+        <h5 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Company</h5>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">About Us</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Contact</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Careers</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Blog</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 col-6 mb-3">
+        <h5 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Legal</h5>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Terms of Service</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Cookie Policy</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Disclaimer</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center pt-3" style="border-top: 1px solid rgba(255,255,255,0.1);">
+      <p style="margin: 0; color: rgba(255,255,255,0.7);">
+        &copy; {{ current_year|default:"2024" }} <a href="{% url 'home' %}" style="color: var(--primary-orange); font-weight: 600;">BasketStats</a>. 
+        All Rights Reserved.
+      </p>
+      <p style="margin: 0.5rem 0 0; color: rgba(255,255,255,0.5); font-size: 0.85rem;">
+        Powered by Django | Designed with <i class="fas fa-heart" style="color: var(--primary-orange);"></i> for Basketball Fans
+      </p>
+    </div>
+  </div>
 </footer>
-   
+
+<style>
+  footer a:hover {
+    color: var(--primary-orange) !important;
+  }
+</style>

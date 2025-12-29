@@ -1,77 +1,311 @@
-{% extends "base.html" %} {% load static %} {% block htmlhead %}
-<link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+{% extends "base.html" %}
+{% load static %}
 
-<style></style>
-{% endblock htmlhead %} {% block content %}
+{% block htmlhead %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+<!-- Google Fonts for better typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  /* Additional page-specific styles */
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Roboto Condensed', sans-serif;
+  }
+</style>
+{% endblock htmlhead %}
+
+{% block content %}
+
+<!-- Hero Section with Enhanced Design -->
 <section id="hero" class="d-flex align-items-center">
-  <div
-    class="container position-relative"
-    data-aos="fade-up"
-    data-aos-delay="500"
-  >
-    <h1>Basketball Stats</h1>
-    <h2>
-      At our platform, we understand the importance of having access to accurate
-      and up-to-date basketball statistics. Our goal is to provide you with the
-      tools you need to analyze and improve your game.
+  <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
+    <h1 class="mb-4">
+      Basketball <span>Stats</span><br>
+      Like Never Before
+    </h1>
+    <h2 class="mb-5">
+      Unlock the power of data-driven basketball insights. Track performance, analyze trends, 
+      and elevate your game with comprehensive statistics and real-time analytics.
     </h2>
-    <a href="{% url 'teams' %}" class="btn-get-started scrollto">Get Started</a>
+    <div class="d-flex flex-wrap gap-5">
+      <a href="{% url 'teams' %}" class="btn btn-get-started mr-2">
+        Explore Teams
+        <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <a href="#stat" class="btn btn-outline mr-2">
+        Learn More
+        <i class="fas fa-chevron-down ml-2"></i>
+      </a>
+    </div>
   </div>
 </section>
 
+<!-- Main Content Wrapper -->
 <div id="section-wrapper">
-  <section id="stat" class="py-3">
-    <div class="row">
-      <div class="container">
-        <div class="linear-bg p-2">
-          <div class="box-title-img d-flex align-items-center mb-1">
-            <div class="img-container">
-              <img
-                class="w-100 object-fit"
-                src="https://cdn.pixabay.com/photo/2013/07/13/09/46/basketball-155997_640.png"
-                alt="basket-img"
-              />
-            </div>
-            <h1 class="section-head ml-1">
-              Elevate Your Game with Comprehensive Statistics
-            </h1>
-          </div>
-          <h3 class="mb-1">More Stats than you can shake a wedge at.</h3>
-          <p clas="lead mb-1">
-            In the world of basketball, the power of accurate and up-to-date
-            statistics is undeniable. Our mission is to provide you with the
-            tools to elevate your game, leveraging data-driven insights for
-            improvement.
+  
+  <!-- Statistics & Features Section -->
+  <section id="stat" class="py-5">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-12 text-center scroll-reveal">
+          <h2 class="section-head mb-3">
+            Comprehensive Basketball Analytics
+          </h2>
+          <p class="lead text-secondary mb-0" style="max-width: 700px; margin: 0 auto;">
+            Access detailed statistics, player performance metrics, and team analytics 
+            all in one powerful platform designed for basketball enthusiasts.
           </p>
         </div>
-        <div class="mx-100">
-          <img
-            class="w-100"
-            src="https://images.unsplash.com/photo-1602357280104-742c517a1d82?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFza2V0YmFsbCUyMGNvdXJ0fGVufDB8fDB8fHww"
-            alt=""
-          />
+      </div>
+
+      <!-- Feature Cards Grid -->
+      <div class="row g-4 mb-5">
+        <div class="col-lg-4 col-md-6 scroll-reveal">
+          <div class="feature-card">
+            <div class="feature-icon">
+              📊
+            </div>
+            <h3 class="mb-3">Real-Time Stats</h3>
+            <p class="text-secondary mb-0">
+              Get instant access to live game statistics, player performance data, 
+              and team rankings updated in real-time.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 scroll-reveal" style="animation-delay: 0.1s;">
+          <div class="feature-card">
+            <div class="feature-icon">
+              🏆
+            </div>
+            <h3 class="mb-3">Team Analytics</h3>
+            <p class="text-secondary mb-0">
+              Deep dive into team performance with advanced metrics, historical data, 
+              and comparative analysis tools.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 scroll-reveal" style="animation-delay: 0.2s;">
+          <div class="feature-card">
+            <div class="feature-icon">
+              📈
+            </div>
+            <h3 class="mb-3">Performance Tracking</h3>
+            <p class="text-secondary mb-0">
+              Monitor player development, track trends over time, and identify 
+              key performance indicators for success.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Card -->
+      <div class="row">
+        <div class="col-12">
+          <div class="linear-bg scroll-reveal-left">
+            <div class="box-title-img d-flex align-items-center mb-4">
+              <div class="img-container">
+                <img
+                  class="w-100"
+                  src="https://cdn.pixabay.com/photo/2013/07/13/09/46/basketball-155997_640.png"
+                  alt="Basketball Icon"
+                />
+              </div>
+              <h2 class="section-head mb-0 ml-3">
+                Elevate Your Game with Data
+              </h2>
+            </div>
+            
+            <h3 class="mb-3" style="color: var(--primary-orange);">
+              More Stats Than You Can Handle
+            </h3>
+            
+            <p class="lead mb-4">
+              In the competitive world of basketball, data is everything. Our platform 
+              provides you with cutting-edge analytics tools to understand player performance, 
+              predict game outcomes, and make informed decisions based on comprehensive statistics.
+            </p>
+            
+            <div class="row mt-4">
+              <div class="col-md-4 mb-3">
+                <div class="stat-item">
+                  <div class="stat-number">1000+</div>
+                  <p class="text-secondary mb-0">Players Tracked</p>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="stat-item">
+                  <div class="stat-number">50+</div>
+                  <p class="text-secondary mb-0">Teams Analyzed</p>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="stat-item">
+                  <div class="stat-number">24/7</div>
+                  <p class="text-secondary mb-0">Real-Time Updates</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Showcase -->
+      <div class="row mt-5">
+        <div class="col-12 scroll-reveal-right">
+          <div class="hover-zoom">
+            <img
+              class="w-100"
+              src="https://kinexon-sports.com/uploads/images/_1200x800_crop_center-center_82_line/al-hdr.jpg.webp"
+              alt="Basketball Court"
+              style="border-radius: 16px;"
+            />
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="rounds" class="section py-5">
-    <div class="row">
-      <div class="container linear-bg p-2 p-lg-4">
-        <h3 class="mb-1">Contact Us</h3>
-        <p class="mb-1">
-          We're here to assist you. If you have any questions, feedback, or need
-          support, don't hesitate to reach out. Our team is always ready to help
-          you make the most of your basketball experience.
-        </p>
-        <a href="#" class="btn btn-secondary">Contact-us</a>
-        <p>
-          Feel free to drop us a line, and we'll get back to you as soon as
-          possible. we look forward to connecting with you!
-        </p>
+  <!-- Why Choose Us Section -->
+  <section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0 scroll-reveal-left">
+          <h2 class="mb-4">Why Basketball Enthusiasts Trust Us</h2>
+          <div class="mb-4">
+            <h5 class="mb-2">
+              <i class="fas fa-check-circle" style="color: var(--primary-orange);"></i>
+              Accurate & Up-to-Date Data
+            </h5>
+            <p class="text-secondary">
+              Our statistics are sourced from official league data and updated in real-time 
+              to ensure you always have the most accurate information.
+            </p>
+          </div>
+          <div class="mb-4">
+            <h5 class="mb-2">
+              <i class="fas fa-check-circle" style="color: var(--primary-orange);"></i>
+              Easy-to-Use Interface
+            </h5>
+            <p class="text-secondary">
+              Navigate through complex data with ease using our intuitive and 
+              beautifully designed interface that puts insights at your fingertips.
+            </p>
+          </div>
+          <div class="mb-4">
+            <h5 class="mb-2">
+              <i class="fas fa-check-circle" style="color: var(--primary-orange);"></i>
+              Comprehensive Coverage
+            </h5>
+            <p class="text-secondary">
+              From player stats to team analytics, we cover every aspect of the game 
+              you need to make informed decisions and enhance your basketball knowledge.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 scroll-reveal-right">
+          <div class="linear-bg text-center p-5">
+            <i class="fas fa-basketball-ball mb-3" style="font-size: 4rem; color: var(--primary-orange);"></i>
+            <h3 class="mb-3">Ready to Get Started?</h3>
+            <p class="text-secondary mb-4">
+              Join thousands of basketball fans who rely on our platform for 
+              accurate statistics and insights.
+            </p>
+            <a href="{% url 'teams' %}" class="cta-button">
+              View All Teams
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Contact Section -->
+  <section id="rounds" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="linear-bg p-4 p-lg-5 text-center scroll-reveal">
+            <i class="fas fa-envelope mb-3" style="font-size: 3rem; color: var(--primary-orange);"></i>
+            <h3 class="mb-3">Get In Touch</h3>
+            <p class="lead mb-4" style="max-width: 600px; margin: 0 auto;">
+              Have questions, feedback, or need support? We're here to help you make 
+              the most of your basketball statistics experience.
+            </p>
+            <a href="#" class="btn btn-primary btn-lg">
+              Contact Us
+              <i class="fas fa-paper-plane ml-2"></i>
+            </a>
+            <p class="mt-4 mb-0 text-secondary">
+              Our team typically responds within 24 hours
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
+
+<!-- Scroll Reveal Animation Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Scroll reveal animation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all scroll-reveal elements
+  document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Header scroll effect
+  const header = document.querySelector('header');
+  if (header) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+});
+</script>
 
 {% endblock %}

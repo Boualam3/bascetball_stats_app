@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block htmlhead %}
+<style>
+  #about-hero {
+    background: var(--gradient-dark);
+    padding: var(--spacing-xl) 0;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  .process-box {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    height: 100%;
+    border-bottom: 4px solid var(--primary-orange);
+    transition: var(--transition-base);
+  }
+
+  .process-box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .icon-circle {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-hero);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .highlight-text {
+    color: var(--primary-orange);
+    font-weight: 700;
+  }
+
+  .tech-badge {
+    background: var(--bg-light);
+    border: 1px solid #dee2e6;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    margin: 5px;
+    font-weight: 600;
+    color: var(--primary-blue);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section id="about-hero">
+  <div class="container">
+    <h1 class="display-4 fw-bold mb-3">About the Project</h1>
+    <p class="lead opacity-75">Automating basketball analytics to provide clarity, not clutter.</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="mb-4">Why I Built This</h2>
+        <p class="text-secondary">
+          In the world of sports analytics, there is often too much noise. I created this platform to bridge the gap between <span class="highlight-text">complex web scraping</span> and <span class="highlight-text">clean data visualization</span>. 
+        </p>
+        <p class="text-secondary">
+          This isn't just a stats table; it's an automated pipeline that ensures every piece of data shown—from Power Ratings to Defensive metrics—is processed, validated, and ready for scouting.
+        </p>
+        <div class="mt-4">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Django</span>
+          <span class="tech-badge">Pandas</span>
+          <span class="tech-badge">BeautifulSoup</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="p-4" style="background: var(--gradient-card); border-radius: var(--radius-xl);">
+          <img src="{% static 'assests/stats-screenshot.png' %}" class="img-fluid rounded shadow-sm" alt="Stats Preview">
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="process-box">
+          <div class="icon-circle mx-auto"><i class="fas fa-cloud-download-alt"></i></div>
+          <h3>Daily Scraping</h3>
+          <p class="text-secondary">Automated scripts fetch raw HTML tables from third-party sports providers every 24 hours.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="process-box">
+          <div class="icon-circle mx-auto"><i class="fas fa-filter"></i></div>
+          <h3>Pandas Filtering</h3>
+          <p class="text-secondary">Raw data is cleaned and filtered to retain only the high-impact metrics requested for scouting.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="process-box">
+          <div class="icon-circle mx-auto"><i class="fas fa-database"></i></div>
+          <h3>Relational Mapping</h3>
+          <p class="text-secondary">Cleaned stats are stored in a structured Django database for fast, team-centric navigation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h3 class="mb-4">Ready to explore the data?</h3>
+    <a href="{% url 'teams' %}" class="btn btn-lg text-white px-5" style="background: var(--primary-orange); border-radius: var(--radius-sm);">
+      View All Teams
+    </a>
+  </div>
+</section>
+
+{% endblock %}

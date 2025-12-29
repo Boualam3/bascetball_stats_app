@@ -1,3 +1,4 @@
+from pathlib import Path
 import os,sys,requests,time
 
 from datetime import datetime
@@ -41,8 +42,10 @@ def scrap_main_table():
                     table_data.append(clubs_data)
 
             df = pd.DataFrame(table_data,columns=column_names)
-
-            df.to_csv('data_stats/table_data.csv', index=False)
+            output_dir = Path('data_stats')
+            output_dir.mkdir(parents=True, exist_ok=True)
+            file_path = output_dir / 'table_data.csv'
+            df.to_csv(file_path, index=False)
             
             return df
         else:
@@ -53,17 +56,7 @@ def scrap_main_table():
         return []
 
 
-# Actually the table looks good just if need more optimizations so it should the last task 
-# TODO customize the table (tables_stats) implement method that take the table customize it and return it ;the method is modify the classes by bootstrap classes and modify the cases by this bellow down 
-'''
-<div class="card text-center">
-    <div class="card-header">
-      Record
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">0-0</h5>
-  </div> 
-'''
+
 
 def scrap_details_page(url):
     response = requests.get(url)
@@ -170,49 +163,3 @@ def extract_data_from_tables(table='',list_tables=[]):
             df = pd.DataFrame(table_data)
             data_frames.append(df)
         return data_frames
-    
-
-# d = scrap_details_page('https://www.teamrankings.com/ncaa-basketball/team/virginia-cavaliers')
-# print(d['ResultAndScheduleStats'])
-
-def old_scrap_details_page_method(url):
-    response = requests.get(url)
-    data_frames = []
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
-        main_page = soup.find('div',class_="main-wrapper clearfix has-left-sidebar")
-        aside = main_page.find('aside',class_='right-sidebar')
-        tables_stats = aside.find_all('table',class_='tr-table')
-        time.sleep(1)
-        for idx,table_stat in enumerate(tables_stats):
-            tread = table_stat.find('thead')
-            header_row = tread.find('tr')
-            columns = header_row.find_all('th')
-            # column_names = [column.text.strip() for column in columns] 
-            
-            table_data = []
-            rows = table_stat.find_all('tr')
-            
-            for row in rows:
-                columns = row.find_all('td')
-                if len(columns) > 0:
-                    clubs_data = [] 
-                    for column in columns:
-                        clubs_data.append(column.text)
-                    
-                    table_data.append(clubs_data)
-            
-            #we remove header (,columns=column_names) it make thing hard to use
-            df = pd.DataFrame(table_data)
-            data_frames.append(df)
-            
-            # we csv just for testing purposes
-            df.to_csv(f'data_stats/others_stats_{idx}.csv', index=False)
-
-        combined_df = pd.concat(data_frames, axis=0)
-        # reset columns indexes
-        combined_df = combined_df.reset_index(drop=True)
-
-        return combined_df
-
-
