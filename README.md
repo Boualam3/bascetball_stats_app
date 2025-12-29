@@ -25,15 +25,15 @@ A personal portfolio project that automates the collection and display of basket
 
 ### 1. Home (Hero)
 The landing page.
-![Hero Section](/bascetball_stats_app/bascetball_stat/static/assests/hero-screenshot.png)
+![Hero Section](/bascetball_stat/static/assests/hero-screenshot.png)
 
 ### 2. Team Rankings (Table Listing)
 The main table showing the overall classification of teams after the daily scrape.
-![Team Rankings](/bascetball_stats_app/bascetball_stat/static/assests/table-screenshot.png)
+![Team Rankings](/bascetball_stat/static/assests/table-screenshot.png)
 
 ### 3. Team Insights (Specific Stats)
 Detailed view for a single team, including Power Ratings and Offensive/Defensive metrics.
-![Team Stats](/bascetball_stats_app/bascetball_stat/static/assests/stats-screenshot.png)
+![Team Stats](/bascetball_stat/static/assests/stats-screenshot.png)
 
 ## Setup
 1. `pip install -r requirements.txt`
